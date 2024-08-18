@@ -1,13 +1,14 @@
-*{
-    margin:0;
-    Padding:0;
-    box-sizing: border-box;
+body{
+    display: grid;
 }
 html, body{
     height:100%;
     width: 100%;
     font-family: "Inter",serif;
     line-height: 1.35;
+    margin:0;
+    Padding:0;
+    box-sizing: border-box;
 }
 h1,h2,h3,h4,h5,h6{
     color: #424242;
