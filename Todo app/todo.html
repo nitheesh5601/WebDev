@@ -1,0 +1,64 @@
+<html>
+
+<body style="text-align: center;">
+  <h1>Todo List</h1>
+  <div id="mainTodolist">
+    <div>
+      <input type="text" placeholder="Enter your text here" id="inp"></input>
+      <button onclick="addTodo()">Add Todo</button>
+      <button onclick="clearAll()">Clear</button>
+    </div>
+  </div>
+  <script>
+    let count=1;
+    function addTodo(){
+      //fetching input
+      const inputText = document.getElementById("inp").value.trim();
+      if(inputText === ""){
+        alert("Don't leave empty");
+        return;
+      }
+      //creating new div element
+      const newDiv = document.createElement("div");
+      newDiv.setAttribute("id", "todo-"+count);
+
+      //creating new heading element
+      const newHeading = document.createElement("h4");
+      newHeading.textContent = inputText; 
+
+      //creating new button element
+      const newButton = document.createElement("button");
+      newButton.textContent = "Delete";
+      newButton.setAttribute("onclick","deleteTodo("+count+")");
+
+      //appending elements
+      newDiv.appendChild(newHeading);
+      newDiv.appendChild(newButton);
+
+      //appending to parent
+      const parentDiv = document.getElementById("mainTodolist");
+      parentDiv.appendChild(newDiv);
+
+      //increasing the count
+      count++;
+
+      //clearing the input field
+      document.getElementById("inp").value = "";
+      
+    }
+
+    function deleteTodo(index){
+      const delText = document.getElementById("todo-"+index);
+      delText.parentNode.removeChild(delText)
+    }
+
+    function clearAll(){
+      const clearParentDiv = document.querySelectorAll("div[id^='todo-']")
+      clearParentDiv.forEach(function(todo){
+        todo.parentNode.removeChild(todo)
+      })
+    }
+  </script>
+</body>
+
+</html>
