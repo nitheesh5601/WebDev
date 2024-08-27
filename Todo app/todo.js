@@ -3,52 +3,52 @@ document.getElementById("inp").addEventListener("keydown", function (event) {
     addTodo();
   }
 });
+
 let count = 1;
+
 function addTodo() {
-  //fetching input
+  // Fetching input
   const inputText = document.getElementById("inp").value.trim();
   if (inputText === "") {
     alert("Don't leave empty");
     return;
   }
-  //creating new div element
+
+  // Creating new div element
   const newDiv = document.createElement("div");
   newDiv.setAttribute("class", "flex");
   newDiv.setAttribute("id", "todo-" + count);
 
-  //creating new heading element
-  var newHeading = document.createElement("li");
+  // Creating new list item element (li)
+  const newHeading = document.createElement("li");
   newHeading.textContent = inputText;
 
-  //creating new button element
+  // Creating new button element
   const newButton = document.createElement("button");
   newButton.textContent = "X";
-  newButton.setAttribute("onclick", "deleteTodo(" + count + ")");
+  newButton.setAttribute("onclick", `deleteTodo(${count})`);
 
-  //appending elements
+  // Appending elements
   newDiv.appendChild(newHeading);
   newDiv.appendChild(newButton);
 
-  //appending to parent
+  // Appending to parent
   const parentDiv = document.getElementById("mainTodolist");
   parentDiv.appendChild(newDiv);
 
-  //increasing the count
+  // Increasing the count
   count++;
 
-  //clearing the input field
+  // Clearing the input field
   document.getElementById("inp").value = "";
-
-  parentDiv.addEventListener(
-    "click",
-    function (e) {
-      if (e.target.tagName === "LI") {
-        e.target.classList.toggle("checked");
-      }
-    },
-    false
-  );
 }
+
+// Adding event listener for toggling check/uncheck using event delegation
+document.getElementById("mainTodolist").addEventListener("click", function (e) {
+  if (e.target.tagName === "LI") {
+    e.target.classList.toggle("checked");
+  }
+});
 
 function deleteTodo(index) {
   const delText = document.getElementById("todo-" + index);
@@ -61,4 +61,3 @@ function clearAll() {
     todo.parentNode.removeChild(todo);
   });
 }
-
